@@ -1,70 +1,77 @@
-﻿# Horóscopo do Dia
+﻿# Semana 09 - Quebra Cabeca
 
-Programa em Python que, a partir da data de nascimento do usuário, identifica o signo e exibe a previsão do dia buscada diretamente do site [Horóscopo Virtual](https://www.horoscopovirtual.com.br).
+**Prof:** Jose Ritomar Carneiro Torquato  
+**Curso:** Tecnico em Desenvolvimento de Sistemas  
+**Local:** Teresina Central (IFPI - Campus Teresina Central)
 
-Este projeto foi montado como um **quebra-cabeça**: cada imagem abaixo é uma peça do código. A ordem das imagens forma o programa completo.
+**Aluno:** Valdeney Sousa Amaral  
+**Disciplina:** Programacao Estruturada de Computadores
 
 ---
 
-## As peças do quebra-cabeça
+## O que e esse projeto?
 
-### Peça 1 — `separar.png`
+Esse projeto foi uma atividade de quebra-cabeca: o professor deu 6 imagens, cada uma com um pedaco de codigo Python, e a gente teve que montar o programa na ordem certa.
+
+O programa pede a data de nascimento da pessoa, descobre o signo dela e busca o horoscopo do dia direto do site [Horoscopo Virtual](https://www.horoscopovirtual.com.br).
+
+---
+
+## As pecas do quebra-cabeca
+
+### Peca 1 — separar.png
 ![separar.png](separar.png)
 
-Função `separar_data(dma)`: recebe a data como número inteiro no formato `DDMMAAAA` e separa em dia, mês e ano usando divisão inteira e módulo.
+Essa funcao `separar_data` recebe a data toda junta como numero (ex: `01011990`) e separa em dia, mes e ano. Ela usa divisao inteira e modulo pra isso.
 
 ---
 
-### Peça 2 — `signo.png`
+### Peca 2 — signo.png
 ![signo.png](signo.png)
 
-Função `signo(dia, mes)`: decide qual signo corresponde ao dia e mês de nascimento usando as datas de corte de cada signo.
+Essa funcao `signo` olha o dia e o mes e devolve o nome do signo. Tem um `if` pra cada mes do ano, comparando com a data de corte de cada signo.
 
 ---
 
-### Peça 3 — `remover.png`
+### Peca 3 — remover.png
 ![remover.png](remover.png)
 
-Função `remover_acentos(texto)`: remove acentos do nome do signo via normalização Unicode (`NFKD`), necessário para montar a URL sem caracteres especiais.
+Essa funcao `remover_acentos` tira os acentos das palavras. Precisa disso porque o nome do signo vai ser usado na URL do site, e URL nao aceita acento (ex: `Capricornio` vira `capricornio`).
 
 ---
 
-### Peça 4 — `horoscopo.png` ⚠️ Correção aplicada
+### Peca 4 — horoscopo.png  ⚠️ Correcao feita aqui!
 ![horoscopo.png](horoscopo.png)
 
-Função `horoscopo(signo_desejado)`: faz uma requisição HTTP ao site e extrai **apenas** o texto da previsão do dia.
+Essa funcao `horoscopo` acessa o site e pega apenas o texto da previsao do dia.
 
-**Correção feita:** o código original da imagem usava `<p class="text-pred">` como marcador para localizar o texto no HTML. Porém, o site foi atualizado e essa classe não existe mais. A solução foi:
+**Problema que encontrei:** o codigo da imagem usava `<p class="text-pred">` pra achar o texto no HTML, mas quando fui testar o programa nao funcionava. Descobri que o site foi atualizado e essa parte do HTML nao existe mais.
 
-1. Localizar o bloco `<article class="text-wrapper">` no HTML
-2. Buscar o primeiro `<p>` **dentro** desse bloco
-3. Recortar apenas o texto entre `<p>` e `</p>`
-
-Isso garante que só o texto da previsão seja exibido, sem HTML desnecessário.
+**Como resolvi:** procurei no HTML do site onde a previsao estava e achei que agora ela fica dentro de um `<article class="text-wrapper">`. Entao mudei o codigo pra localizar esse artigo primeiro e depois pegar o `<p>` que tem o texto da previsao. Assim so aparece o texto, sem mostrar o HTML todo.
 
 ---
 
-### Peça 5 — `main.png`
+### Peca 5 — main.png
 ![main.png](main.png)
 
-Função `main()`: organiza o fluxo completo — lê a data, separa, descobre o signo, busca o horóscopo e imprime.
+Essa funcao `main` e a principal, que junta tudo: pede a data pro usuario, chama as outras funcoes e imprime o resultado.
 
 ---
 
-### Peça 6 — `name.png`
+### Peca 6 — name.png
 ![name.png](name.png)
 
-Bloco `if __name__ == '__main__'`: garante que `main()` só rode quando o arquivo é executado diretamente, não quando importado.
+Esse bloco `if __name__ == '__main__'` e um padrao do Python. Ele garante que o programa so comeca a rodar quando o arquivo e executado diretamente.
 
 ---
 
-## Como executar
+## Como rodar
 
 ```bash
 python app.py
 ```
 
-Informe a data de nascimento no formato `DDMMAAAA` quando solicitado:
+Ai so digitar a data de nascimento no formato `DDMMAAAA`:
 
 ```
 Digite sua data de nascimento no formato DDMMAAAA: 01011990
@@ -73,33 +80,33 @@ Capricornio: O dia pede escuta interna e planejamento silencioso...
 
 ---
 
-## Explicação linha a linha
+## O que cada funcao faz (resumo)
 
-O arquivo `app.py` contém comentários em **cada linha**, escritos em linguagem simples para facilitar o estudo. Abaixo um resumo das funções:
-
-| Função | Peça | O que faz |
-|--------|------|-----------|
-| `separar_data(dma)` | separar.png | Separa DDMMAAAA em dia, mês e ano |
-| `signo(dia, mes)` | signo.png | Retorna o nome do signo |
-| `remover_acentos(texto)` | remover.png | Remove acentos para montar a URL |
-| `horoscopo(signo_desejado)` | horoscopo.png | Busca a previsão no site |
-| `main()` | main.png | Orquestra tudo |
+| Funcao | Imagem | O que faz |
+|--------|--------|-----------|
+| `separar_data` | separar.png | Separa DDMMAAAA em dia, mes e ano |
+| `signo` | signo.png | Descobre o signo pelo dia e mes |
+| `remover_acentos` | remover.png | Tira acentos para usar na URL |
+| `horoscopo` | horoscopo.png | Busca o horoscopo no site |
+| `main` | main.png | Funcao principal, junta tudo |
 | `if __name__` | name.png | Ponto de entrada do programa |
 
 ---
 
-## Detalhes da correção (`horoscopo.png`)
+## O que precisei mudar no codigo original
 
-| | Código da imagem (original) | Código corrigido |
+A unica mudanca necessaria foi na funcao `horoscopo` (peca 4):
+
+| | Codigo da imagem | Codigo corrigido |
 |--|--|--|
-| Marcador usado | `<p class="text-pred">` | `class="text-wrapper"` + `<p>` |
-| Problema | Classe removida do site | — |
-| Resultado | Não encontrava o texto | Encontra e extrai só a previsão |
+| Marcador original | `<p class="text-pred">` | `class="text-wrapper"` + `<p>` |
+| Motivo | Classe foi removida do site | — |
+| Resultado | Programa nao achava o texto | Busca e mostra so a previsao |
 
 ---
 
-## Requisitos
+## O que precisa ter instalado
 
-- Python 3.x
-- Bibliotecas padrão apenas (`urllib`, `unicodedata`) — sem instalações adicionais
-- Conexão com a internet
+- Python 3
+- Nao precisa instalar nada extra, usa so bibliotecas que ja vem no Python
+- Precisa de internet pra acessar o site
